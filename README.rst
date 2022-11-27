@@ -24,34 +24,39 @@ Usage
 
 .. code-block:: bash
 
-    $ pip install schedule
+    $ git clone https://github.com/usunyu/async-schedule
 
 .. code-block:: python
 
-    import schedule
-    import time
+    from schedule import async_schedule
+    import asyncio
 
-    def job():
+    async def job():
+        await asyncio.sleep(1.0)
         print("I'm working...")
     
-    schedule.every(10).seconds.do(job)
-    schedule.every(10).minutes.do(job)
-    schedule.every().hour.do(job)
-    schedule.every().day.at("10:30").do(job)
-    schedule.every(5).to(10).minutes.do(job)
-    schedule.every().monday.do(job)
-    schedule.every().wednesday.at("13:15").do(job)
-    schedule.every().day.at("12:42", "Europe/Amsterdam").do(job)
-    schedule.every().minute.at(":17").do(job)
+    async_schedule.every(10).seconds.do(job)
+    async_schedule.every(10).minutes.do(job)
+    async_schedule.every().hour.do(job)
+    async_schedule.every().day.at("10:30").do(job)
+    async_schedule.every(5).to(10).minutes.do(job)
+    async_schedule.every().monday.do(job)
+    async_schedule.every().wednesday.at("13:15").do(job)
+    async_schedule.every().day.at("12:42", "Europe/Amsterdam").do(job)
+    async_schedule.every().minute.at(":17").do(job)
 
-    def job_with_argument(name):
+    async def job_with_argument(name):
+        await asyncio.sleep(1.0)
         print(f"I am {name}")
         
-    schedule.every(10).seconds.do(job_with_argument, name="Peter")
+    async_schedule.every(10).seconds.do(job_with_argument, name="Peter")
         
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+    async def main():
+        while True:
+            await async_schedule.run_pending()
+            await asyncio.sleep(1.0)
+
+    asyncio.run(main())
 
 Documentation
 -------------
