@@ -24,12 +24,14 @@ Usage
 
 .. code-block:: bash
 
-    $ git clone https://github.com/usunyu/async-schedule
+    $ mkdir schedule
+    $ cd schedule
+    $ curl -L https://codeload.github.com/usunyu/async-schedule/tar.gz/master | tar -xz --strip=2 async-schedule-master/schedule
 
 .. code-block:: python
 
-    from schedule import async_schedule
     import asyncio
+    from schedule import async_schedule
 
     async def job():
         await asyncio.sleep(1.0)
